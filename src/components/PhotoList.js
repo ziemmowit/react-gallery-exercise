@@ -5,26 +5,40 @@ import axios from 'axios';
 import Photo from './Photo';
 
 class PhotoList extends React.Component {
-  state = {photoList: []}
+  state = {photoList: [], loaded: false}
 
   componentDidMount() {
-    this.fetchPhotos();
+    window.addEventListener('scroll', this.loadMorePhotos, false);
+    this.fetchPhotos(32);
   }
 
-  fetchPhotos = () => {
-    let pNum = 16
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.loadMorePhotos, false);
+  }
 
+  loadMorePhotos = () => {
+    console.log(window.innerHeight + window.scrollY >= document.body.offsetHeight);
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      this.fetchPhotos();
+    }
+
+  }
+
+  fetchPhotos = (pNum = 16) => {
+    this.setState({loaded: false})
     axios({
       url: `https://shibe.online/api/shibes?count=${pNum}`,
       method: 'GET',
     }).then(response => {
       this.setState({
-        photoList: response.data
+        photoList: this.state.photoList.concat(response.data),
+        loaded: true
       })
     }, error => {
       this.setState({
-        photoList: []
+        loaded: true
       })
+      console.log("Error: " + error);
     })
   }
 
@@ -34,21 +48,20 @@ class PhotoList extends React.Component {
   }
 
   render () {
-    let {photoList} = this.state;
+    let {photoList, loaded} = this.state;
 
     return (
       <div id="photo-list">
         <div className="row">
           { photoList.length > 0 ?
               photoList.map((link, i) => (
-                <Photo url={link} key={this.extractId(link)} />
+                <Photo url={link} key={i + this.extractId(link)} />
               ))
             :
-            (<p>Błąd ładowania danych</p>)
+            (<p className="error-msg"><i className="fas fa-spinner fa-spin"></i></p>)
           }
         </div>
       </div>
-
     )
   }
 }
