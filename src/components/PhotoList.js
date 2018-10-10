@@ -11,7 +11,6 @@ class PhotoList extends React.Component {
     window.addEventListener('scroll', this.loadMorePhotos, false);
     this.fetchPhotos(32);
   }
-
   componentWillUnmount() {
     window.removeEventListener('scroll', this.loadMorePhotos, false);
   }
@@ -22,7 +21,6 @@ class PhotoList extends React.Component {
     }
 
   }
-
   fetchPhotos = (pNum = 16) => {
     this.setState({loaded: false})
     axios({
@@ -45,7 +43,6 @@ class PhotoList extends React.Component {
     const arr = str.split("/");
     return arr[arr.length - 1].split(".")[0];
   }
-
   updateFavourites = (link) => {
     let arr = this.state.favList;
 
@@ -61,7 +58,6 @@ class PhotoList extends React.Component {
   showPhotoList = () => {
     this.setState({currentPage: 'photoList'});
   }
-
   showFavList = () => {
     this.setState({currentPage: 'favList'});
   }
