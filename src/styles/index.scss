@@ -31,5 +31,10 @@ body {
         color: yellow;
       }
     }
+    &.active {
+      .add-to-favourites {
+        color: yellow;
+      }
+    }
   }
 }

@@ -5,7 +5,7 @@ import axios from 'axios';
 import Photo from './Photo';
 
 class PhotoList extends React.Component {
-  state = {photoList: [], loaded: false}
+  state = {photoList: [], favList: [], loaded: false}
 
   componentDidMount() {
     window.addEventListener('scroll', this.loadMorePhotos, false);
@@ -18,7 +18,7 @@ class PhotoList extends React.Component {
 
   loadMorePhotos = () => {
     console.log(window.innerHeight + window.scrollY >= document.body.offsetHeight);
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && this.state.loaded) {
       this.fetchPhotos();
     }
 
@@ -47,15 +47,29 @@ class PhotoList extends React.Component {
     return arr[arr.length - 1].split(".")[0];
   }
 
+  updateFavourites = (link) => {
+    console.log("Updating" + link);
+        console.log(this.state.favList);
+    if(this.state.favList.includes(link)) {
+      let arr = this.state.favList;
+      arr = arr.filter((value) => value != link);
+      this.setState({favList: arr})
+    } else {
+      let arr = this.state.favList;
+      arr = arr.concat(this.state.favList, [link]);
+      this.setState({favList: arr})
+    }
+  }
+
   render () {
-    let {photoList, loaded} = this.state;
+    let {photoList, favList, loaded} = this.state;
 
     return (
       <div id="photo-list">
         <div className="row">
           { photoList.length > 0 ?
               photoList.map((link, i) => (
-                <Photo url={link} key={i + this.extractId(link)} />
+                <Photo favourites={favList.includes(link)} url={link} key={i + this.extractId(link)} updateFavourites={this.updateFavourites}/>
               ))
             :
             (<p className="error-msg"><i className="fas fa-spinner fa-spin"></i></p>)
