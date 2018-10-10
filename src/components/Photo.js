@@ -6,7 +6,9 @@ class Photo extends React.Component {
     return (
       <div className="col-3">
         <div className="photo-item">
-          <img className="img-thumbnail" src={this.props.url} alt={this.props.id} />
+          <div className="photo-wrapper img-thumbnail">
+            <div className="photo" style={{backgroundImage: `url(${this.props.url})`}}></div>
+          </div>
           <button href="#" className="add-to-favourites btn btn-link"><i className="fas fa-star"></i></button>
         </div>
       </div>

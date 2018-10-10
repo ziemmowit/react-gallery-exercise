@@ -1,4 +1,5 @@
 @import 'bootstrap/bootstrap';
+@import 'mixins';
 
 body {
   background: #fff;
@@ -10,6 +11,14 @@ body {
   .photo-item {
     margin-bottom: 30px;
     position: relative;
+
+    .photo {
+      background-position: 50% 50%;
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+      height: 170px;
+      width: 100%;
+    }
 
     .add-to-favourites {
       color: #fff;
