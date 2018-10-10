@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import axios from 'axios';
 
+import Photo from './Photo';
+
 class PhotoList extends React.Component {
   state = {photoList: []}
 
@@ -39,12 +41,7 @@ class PhotoList extends React.Component {
         <div className="row">
           { photoList.length > 0 ?
               photoList.map((link, i) => (
-                <div key={this.extractId(link)} className="col-3">
-                  <div className="photo-item">
-                    <img className="img-thumbnail" src={link} alt={this.extractId(link)} />
-                    <button href="#" className="add-to-favourites btn btn-link"><i className="fas fa-star"></i></button>
-                  </div>
-                </div>
+                <Photo url={link} key={this.extractId(link)} />
               ))
             :
             (<p>Błąd ładowania danych</p>)
