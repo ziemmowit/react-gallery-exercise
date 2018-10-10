@@ -50,8 +50,8 @@ class App extends React.Component {
     let {photoList, favList, loaded, currentPage} = this.state;
 
     return (
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div>
+        <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand" href="#">Galeria</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -67,8 +67,9 @@ class App extends React.Component {
             </ul>
           </div>
         </nav>
-
-        <PhotoList photoList={photoList} favList={favList} mode={currentPage} loaded={loaded}/>
+        <div className="container">
+          <PhotoList photoList={photoList} favList={favList} mode={currentPage} loaded={loaded}/>
+        </div>
       </div>
     )
   }
