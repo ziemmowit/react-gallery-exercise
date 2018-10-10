@@ -5,7 +5,7 @@ import axios from 'axios';
 import Photo from './Photo';
 
 class PhotoList extends React.Component {
-  state = {photoList: [], favList: [], loaded: false}
+  state = {photoList: [], favList: [], loaded: false, currentPage: 'photoList'}
 
   componentDidMount() {
     window.addEventListener('scroll', this.loadMorePhotos, false);
@@ -52,24 +52,51 @@ class PhotoList extends React.Component {
     if (arr.includes(link)) {
       arr = arr.filter((value) => value != link);
     } else {
-      arr = arr.concat(this.state.favList, [link]);
+      arr.push(link)
     }
 
     this.setState({favList: arr})
   }
 
+  showPhotoList = () => {
+    this.setState({currentPage: 'photoList'});
+  }
+
+  showFavList = () => {
+    this.setState({currentPage: 'favList'});
+  }
+
+  noPhotosMsg = () => {
+    if(!this.state.loaded) {
+      return (<div className="col"><p className="loading-msg"><i className="fas fa-spinner fa-spin"></i></p></div>)
+    } else {
+      return (<div className="col"><p className="loading-msg">Brak zdjęć</p></div>)
+    }
+  }
+
   render () {
-    let {photoList, favList, loaded} = this.state;
+    let {photoList, favList, loaded, currentPage} = this.state;
+
+    let list = [];
+    if(currentPage === "favList") {
+      list = this.state.favList;
+    } else {
+      list = this.state.photoList;
+    }
 
     return (
       <div id="photo-list">
+        <div>
+          <button onClick={this.showPhotoList}>PhotoList</button>
+          <button onClick={this.showFavList}>FavList</button>
+        </div>
         <div className="row">
-          { photoList.length > 0 ?
-              photoList.map((link, i) => (
+          { list.length > 0 ?
+              list.map((link, i) => (
                 <Photo favourites={favList.includes(link)} url={link} key={i + this.extractId(link)} updateFavourites={this.updateFavourites}/>
               ))
             :
-            (<p className="error-msg"><i className="fas fa-spinner fa-spin"></i></p>)
+            (this.noPhotosMsg())
           }
         </div>
       </div>
