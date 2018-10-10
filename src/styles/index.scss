@@ -1,5 +1,25 @@
 @import 'bootstrap/bootstrap';
 
 body {
-  background: #ccc;
+  background: #fff;
+}
+
+#photo-list {
+  margin: 30px 0;
+
+  .photo-item {
+    position: relative;
+
+    .add-to-favourites {
+      color: #fff;
+      font-size: 18px;
+      right: 0;
+      position: absolute;
+      top: 0;
+
+      &:hover {
+        color: yellow;
+      }
+    }
+  }
 }
