@@ -17,7 +17,6 @@ class PhotoList extends React.Component {
   }
 
   loadMorePhotos = () => {
-    console.log(window.innerHeight + window.scrollY >= document.body.offsetHeight);
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight && this.state.loaded) {
       this.fetchPhotos();
     }
@@ -48,17 +47,15 @@ class PhotoList extends React.Component {
   }
 
   updateFavourites = (link) => {
-    console.log("Updating" + link);
-        console.log(this.state.favList);
-    if(this.state.favList.includes(link)) {
-      let arr = this.state.favList;
+    let arr = this.state.favList;
+
+    if (arr.includes(link)) {
       arr = arr.filter((value) => value != link);
-      this.setState({favList: arr})
     } else {
-      let arr = this.state.favList;
       arr = arr.concat(this.state.favList, [link]);
-      this.setState({favList: arr})
     }
+
+    this.setState({favList: arr})
   }
 
   render () {
