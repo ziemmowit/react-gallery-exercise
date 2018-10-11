@@ -28,22 +28,27 @@ class PhotoList extends React.Component {
     }
 
     const photos = list.map((link, i) => (
-      <Photo favourites={this.props.favList.includes(link)} url={link} key={this.extractId(link)} updateFavourites={this.props.updateFavourites}/>
+      <Photo favourites={this.props.favList.includes(link)} url={link} key={"this.props.mode"+this.extractId(link)} updateFavourites={this.props.updateFavourites}/>
     ))
 
     return (
       <div id="photo-list">
         { list.length > 0 ?
           (
-            <CSSTransitionGroup
-              transitionName="photo-item"
-              transitionEnterTimeout={1000}
-              transitionLeaveTimeout={500}
-              component="div"
-              className="row">
-              {photos}
+            this.props.mode === "favList" ?
+            (
+              <CSSTransitionGroup
+                transitionName="photo-item"
+                transitionEnterTimeout={1000}
+                transitionLeaveTimeout={500}
+                component="div"
+                className="row">
+                {photos}
 
-            </CSSTransitionGroup>
+              </CSSTransitionGroup>
+            ) : (
+              (<div className="row">{photos}</div>)
+            )
           )
           :
           (this.noPhotosMsg())
