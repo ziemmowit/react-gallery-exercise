@@ -25,7 +25,7 @@ class App extends React.Component {
   fetchPhotos = (pNum = 16) => {
     this.setState({loaded: false})
     axios({
-      url: `https://shibe.online/api/shibes?count=${pNum}`,
+      url: `https://cors-anywhere.herokuapp.com/http://shibe.online/api/shibes?count=${pNum}`,
       method: 'GET',
     }).then(response => {
       this.setState({

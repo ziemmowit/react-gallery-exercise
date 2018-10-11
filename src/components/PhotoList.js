@@ -44,10 +44,14 @@ class PhotoList extends React.Component {
                 component="div"
                 className="row">
                 {photos}
-
               </CSSTransitionGroup>
             ) : (
-              (<div className="row">{photos}</div>)
+              (
+                <div className="row">
+                  {photos}
+                  <div className="col"><p className="loading-msg"><i className="fas fa-spinner fa-spin"></i></p></div>
+                </div>
+              )
             )
           )
           :
