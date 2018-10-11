@@ -28,7 +28,7 @@ class PhotoList extends React.Component {
     }
 
     const photos = list.map((link, i) => (
-      <Photo favourites={this.props.favList.includes(link)} url={link} key={"this.props.mode"+this.extractId(link)} updateFavourites={this.props.updateFavourites}/>
+      <Photo favourites={this.props.favList.includes(link)} url={link} key={this.extractId(link)} updateFavourites={this.props.updateFavourites}/>
     ))
 
     return (
