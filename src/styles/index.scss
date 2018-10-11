@@ -18,7 +18,7 @@ body {
 
     &.photo-item-enter.photo-item-enter-active {
       opacity: 1;
-      transition: opacity 1000ms ease-in;
+      transition: opacity 000ms ease-in;
     }
 
     &.photo-item-leave {
@@ -36,23 +36,28 @@ body {
     position: relative;
 
     .photo {
+      background-image: url('../assets/img/img-loading.png');
       background-position: 50% 50%;
       background-size: 100% auto;
       background-repeat: no-repeat;
       height: 170px;
-      width: 100%;
+      width: 245px;
 
       @include media-breakpoint-only(xs) {
         height: 240px;
+        width: 505px;
       }
       @include media-breakpoint-only(sm) {
         height: 160px;
+        width: 230px;
       }
       @include media-breakpoint-only(md) {
         height: 139px;
+        width: 200px;
       }
       @include media-breakpoint-only(lg) {
         height: 194px;
+        width: 290px;
       }
     }
 
