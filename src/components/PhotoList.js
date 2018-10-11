@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { CSSTransitionGroup } from 'react-transition-group'
 
 import Photo from "./Photo"
 
@@ -26,18 +27,27 @@ class PhotoList extends React.Component {
       list = this.props.photoList;
     }
 
+    const photos = list.map((link, i) => (
+      <Photo favourites={this.props.favList.includes(link)} url={link} key={this.extractId(link)} updateFavourites={this.props.updateFavourites}/>
+    ))
+
     return (
       <div id="photo-list">
+        { list.length > 0 ?
+          (
+            <CSSTransitionGroup
+              transitionName="photo-item"
+              transitionEnterTimeout={1000}
+              transitionLeaveTimeout={500}
+              component="div"
+              className="row">
+              {photos}
 
-        <div className="row">
-          { list.length > 0 ?
-              list.map((link, i) => (
-                <Photo favourites={this.props.favList.includes(link)} url={link} key={i + this.extractId(link)} updateFavourites={this.props.updateFavourites}/>
-              ))
-            :
-            (this.noPhotosMsg())
-          }
-        </div>
+            </CSSTransitionGroup>
+          )
+          :
+          (this.noPhotosMsg())
+        }
       </div>
     )
   }

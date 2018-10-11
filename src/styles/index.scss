@@ -10,6 +10,27 @@ body {
 #photo-list {
   margin: 30px 0 0;
 
+
+  .photo-item-outer {
+    &.photo-item-enter {
+      opacity: 0.1;
+    }
+
+    &.photo-item-enter.photo-item-enter-active {
+      opacity: 1;
+      transition: opacity 1000ms ease-in;
+    }
+
+    &.photo-item-leave {
+      opacity: 1;
+    }
+
+    &.photo-item-leave.photo-item-leave-active {
+      opacity: 0;
+      transition: opacity 500ms ease-in;
+    }
+  }
+
   .photo-item {
     margin-bottom: 30px;
     position: relative;

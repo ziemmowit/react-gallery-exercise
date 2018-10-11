@@ -11,7 +11,7 @@ class Photo extends React.Component {
   }
   render () {
     return (
-      <div className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+      <div className="photo-item-outer col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
         <div className={this.photoClass()}>
           <div className="photo-wrapper img-thumbnail">
             <div className="photo" style={{backgroundImage: `url(${this.props.url})`}}></div>
