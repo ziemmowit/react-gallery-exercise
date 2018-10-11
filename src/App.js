@@ -47,6 +47,19 @@ class App extends React.Component {
     this.setState({currentPage: 'favList'});
   }
 
+  updateFavourites = (link) => {
+    let arr = this.state.favList;
+
+    if (arr.includes(link)) {
+      arr = arr.filter((value) => value != link);
+    } else {
+      arr.push(link)
+    }
+
+    this.setState({favList: arr})
+  }
+
+
   render () {
     let {photoList, favList, loaded, currentPage} = this.state;
 
@@ -54,7 +67,7 @@ class App extends React.Component {
       <div>
         <Header showPhotoList={this.showPhotoList} showFavList={this.showFavList} currentPage={currentPage}/>
         <div className="container">
-          <PhotoList photoList={photoList} favList={favList} mode={currentPage} loaded={loaded}/>
+          <PhotoList photoList={photoList} favList={favList} mode={currentPage} loaded={loaded} updateFavourites={this.updateFavourites}/>
         </div>
       </div>
     )

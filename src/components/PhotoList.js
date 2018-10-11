@@ -18,17 +18,6 @@ class PhotoList extends React.Component {
     }
   }
 
-  updateFavourites = (link) => {
-    let arr = this.props.favList;
-
-    if (arr.includes(link)) {
-      arr = arr.filter((value) => value != link);
-    } else {
-      arr.push(link)
-    }
-
-    this.setState({favList: arr})
-  }
   render () {
     let list = [];
     if(this.props.mode === "favList") {
@@ -43,7 +32,7 @@ class PhotoList extends React.Component {
         <div className="row">
           { list.length > 0 ?
               list.map((link, i) => (
-                <Photo favourites={this.props.favList.includes(link)} url={link} key={i + this.extractId(link)} updateFavourites={this.updateFavourites}/>
+                <Photo favourites={this.props.favList.includes(link)} url={link} key={i + this.extractId(link)} updateFavourites={this.props.updateFavourites}/>
               ))
             :
             (this.noPhotosMsg())
